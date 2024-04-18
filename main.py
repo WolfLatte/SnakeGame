@@ -3,3 +3,5 @@ window = tk.Tk()
 window.title("window")
 
 hi
+hello
+
