@@ -29,6 +29,8 @@ def change_direction(turn):
 
 def game_over():
     pass
+
+
 #######################################################
 window = tk.Tk()
 window.title("window")
