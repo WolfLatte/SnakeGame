@@ -33,7 +33,7 @@ def game_over():
 
 #######################################################
 window = tk.Tk()
-window.title("window")
+window.title("Snake Game")
 
 
 window.mainloop()
