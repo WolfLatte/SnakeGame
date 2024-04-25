@@ -1,13 +1,17 @@
 import tkinter as tk
 
 # Game Settings
-GAME_WIDTH = 800
-GAME_HEIGHT = 800
-SPACE = 50
+ROWS = 25
+COLUMNS = 25
+SPACE = 25
+WINDOW_WIDTH = SPACE * COLUMNS
+WINDOW_HEIGHT = SPACE * ROWS
+
+
 BODY = 1
 SNAKE_COLOR = "E7906D"
 FOOD = "#996DE7"
-BG = "E6D8D2"
+BG = "white"
 
 
 #Base funtions
@@ -34,6 +38,17 @@ def game_over():
 #######################################################
 window = tk.Tk()
 window.title("Snake Game")
+window.resizable(False, False)
+
+canvas =tk.Canvas(
+    window,
+    bg=BG,
+    width=WINDOW_WIDTH,
+    height=WINDOW_HEIGHT,
+    borderwidth=0,
+    highlightthickness=0
+)
+canvas.pack()
 
 
 window.mainloop()
