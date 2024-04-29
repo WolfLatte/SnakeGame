@@ -50,5 +50,8 @@ canvas =tk.Canvas(
 )
 canvas.pack()
 
+score=0
+label1=Label(master=window, text="Points:{}".format(score), font=('consolas',20))
+label1.pack()
 
 window.mainloop()
