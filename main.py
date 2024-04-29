@@ -31,6 +31,14 @@ def turn():
 def change_direction(turn):
     pass
 
+def check_collision(self):
+    x, y =snake.coordinates[0]
+    if x<0 or x>=625:
+        return True
+    elif y<0 or y>=625:
+        return True
+    
+    
 def game_over():
     pass
 
@@ -51,7 +59,7 @@ canvas =tk.Canvas(
 canvas.pack()
 
 score=0
-label1=Label(master=window, text="Points:{}".format(score), font=('consolas',20))
+label1=tk.Label(master=window, text="Points:{}".format(score), font=('consolas',20))
 label1.pack()
 
 window.mainloop()
