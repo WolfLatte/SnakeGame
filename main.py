@@ -6,7 +6,7 @@ class Snake:
         self.master = master
         master.title("Snake")
 
-        #game canvas in window
+        # Set up the game canvas
         self.canvas = tk.Canvas(
             master, 
             width=400, 
@@ -15,23 +15,23 @@ class Snake:
         )
         self.canvas.pack()
 
-        # Create the snake and food 
+        # Create the snake and food
         self.snake = [(200, 200), (190, 200), (180, 200)]
         self.food = self.create_food()
 
         # Set up the game loop
         self.direction = 'Right'
         self.game_over = False
-        self.delay = 100
+        self.delay = 500
         self.score = 0
         self.label = tk.Label(master, text=f"Score: {self.score}")
         self.label.pack()
 
         # Bind arrow keys to change direction
-        master.bind('<Up>', lambda event: self.change_direction('Up'))
-        master.bind('<Down>', lambda event: self.change_direction('Down'))
-        master.bind('<Left>', lambda event: self.change_direction('Left'))
-        master.bind('<Right>', lambda event: self.change_direction('Right'))
+        master.bind('<Up>', self.change_direction_up)
+        master.bind('<Down>', self.change_direction_down)
+        master.bind('<Left>', self.change_direction_left)
+        master.bind('<Right>', self.change_direction_right)
 
         # Start the game loop
         self.game_loop()
@@ -80,7 +80,7 @@ class Snake:
                 self.game_over = True
 
     def check_food(self):
-    # Check if the snake has eaten the food
+        # Check if the snake has eaten the food
         head_coords = self.canvas.coords(self.food)
         if self.snake[0][0] >= head_coords[0] and self.snake[0][0] <= head_coords[2] and self.snake[0][1] >= head_coords[1] and self.snake[0][1] <= head_coords[3]:
             self.canvas.delete(self.food)
@@ -89,15 +89,20 @@ class Snake:
             self.label.config(text=f"Score: {self.score}")
             self.snake.append(self.snake[-1])
 
-    def change_direction(self, direction):
-        # Change the direction of the snake
-        if direction == 'Up' and self.direction!= 'Down':
+    def change_direction_up(self, event):
+        if self.direction!= 'Down':
             self.direction = 'Up'
-        elif direction == 'Down' and self.direction!= 'Up':
+
+    def change_direction_down(self, event):
+        if self.direction!= 'Up':
             self.direction = 'Down'
-        elif direction == 'Left' and self.direction!= 'Right':
+
+    def change_direction_left(self, event):
+        if self.direction!= 'Right':
             self.direction = 'Left'
-        elif direction == 'Right' and self.direction!= 'Left':
+
+    def change_direction_right(self, event):
+        if self.direction!= 'Left':
             self.direction = 'Right'
 
     def game_loop(self):
@@ -118,6 +123,11 @@ class Snake:
                     font=('Helvetica', 30)
                 )
 
+# Create the game window
 window = tk.Tk()
+
+# Start the game
 snake = Snake(window)
+
+# Run the game window
 window.mainloop()
