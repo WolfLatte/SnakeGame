@@ -113,7 +113,7 @@ class Snake:
                 self.canvas.create_text(
                     200, 
                     200, 
-                    text="You Lost - Game Over!", 
+                    text="You Lost", 
                     fill='white', 
                     font=('Helvetica', 30)
                 )
