@@ -22,7 +22,7 @@ class Snake:
         # Set up the game loop
         self.direction = 'Right'
         self.game_over = False
-        self.delay = 500
+        self.delay = 100
         self.score = 0
         self.label = tk.Label(master, text=f"Score: {self.score}")
         self.label.pack()
