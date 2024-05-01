@@ -24,7 +24,12 @@ class Snake:
         self.game_over = False
         self.delay = 100
         self.score = 0
-        self.label = tk.Label(master, text=f"Score: {self.score}")
+        #Written by Maite
+        self.label = tk.Label(
+            master, 
+            text=f"Points: {self.score}",
+            font=('consolas',20)
+        )
         self.label.pack()
 
         # Bind arrow keys to change direction
@@ -120,7 +125,7 @@ class Snake:
                     200, 
                     text="You Lost", 
                     fill='white', 
-                    font=('Helvetica', 30)
+                    font=('consolas',30)
                 )
 
 # Create the game window
