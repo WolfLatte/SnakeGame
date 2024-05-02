@@ -92,8 +92,6 @@ class Snake:
         snake=Snake(master=window)
 
        
-
-
     def check_food(self):
         # Check if the snake has eaten the food
         head_coords = self.canvas.coords(self.food)
@@ -138,8 +136,6 @@ class Snake:
                     fill='white', 
                     font=('consolas',30)
                 )
-        snake=Snake()
-        food=Food()
 
 # Create the game window
 window = tk.Tk()
