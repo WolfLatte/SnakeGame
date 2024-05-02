@@ -84,6 +84,16 @@ class Snake:
             if head == segment:
                 self.game_over = True
 
+    def game_restart(self):
+        self.canvas.delete("all")
+        self.canvas.delete("You Lost")
+        score=0
+        tk.Label.config(text='Score:{}'.format(score))
+        snake=Snake(master=window)
+
+       
+
+
     def check_food(self):
         # Check if the snake has eaten the food
         head_coords = self.canvas.coords(self.food)
@@ -120,6 +130,7 @@ class Snake:
             if not self.game_over:
                 self.master.after(self.delay, self.game_loop)
             else:
+                self.canvas.delete("all")
                 self.canvas.create_text(
                     200, 
                     200, 
@@ -127,6 +138,8 @@ class Snake:
                     fill='white', 
                     font=('consolas',30)
                 )
+        snake=Snake()
+        food=Food()
 
 # Create the game window
 window = tk.Tk()
