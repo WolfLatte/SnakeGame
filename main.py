@@ -31,7 +31,7 @@ class Snake:
             font=('consolas',20)
         )
         self.label.pack()
-        self.restart_button=tk.Button(master=window, text="Restart", command=self.game_restart)
+        self.restart_button=tk.Button(master=window, text="Restart", font=('consolas', 20), command=self.game_restart)
         self.restart_button.pack()
 
         # Bind arrow keys to change direction
