@@ -64,6 +64,7 @@ class Snake:
 
     def move_snake(self):
         # Move the snake one step in the current direction
+        print(self.direction)
         head = self.snake[0]
         if self.direction == 'Up':
             new_head = (head[0], head[1]-20)
@@ -83,6 +84,7 @@ class Snake:
         if head[0] < 0 or head[0] >= 400 or head[1] < 0 or head[1] >= 400:
             self.game_over = True
         for segment in self.snake[1:]:
+            print(head, segment)
             if head == segment:
                 self.game_over = True
 
@@ -104,7 +106,11 @@ class Snake:
     def check_food(self):
         # Check if the snake has eaten the food
         head_coords = self.canvas.coords(self.food)
-        if self.snake[0][0] >= head_coords[0] and self.snake[0][0] <= head_coords[2] and self.snake[0][1] >= head_coords[1] and self.snake[0][1] <= head_coords[3]:
+        # print(self.snake[0][0], head_coords[0])
+        # print(self.snake[0][1], head_coords[1])
+        # print("\n")
+        if self.snake[0][0] == int(head_coords[0]) and self.snake[0][1] == int(head_coords[1]):
+        # if self.snake[0][0] >= head_coords[0] and self.snake[0][0] <= head_coords[2] and self.snake[0][1] >= head_coords[1] and self.snake[0][1] <= head_coords[3]:
             self.canvas.delete(self.food)
             self.food = self.create_food()
             self.score += 1
@@ -113,18 +119,22 @@ class Snake:
 
     def change_direction_up(self, event):
         if self.direction!= 'Down':
+            print("change: up")
             self.direction = 'Up'
 
     def change_direction_down(self, event):
         if self.direction!= 'Up':
+            print("change: down")
             self.direction = 'Down'
 
     def change_direction_left(self, event):
         if self.direction!= 'Right':
+            print("change: left")
             self.direction = 'Left'
 
     def change_direction_right(self, event):
         if self.direction!= 'Left':
+            print("change: right")
             self.direction = 'Right'
 
     def game_loop(self):
