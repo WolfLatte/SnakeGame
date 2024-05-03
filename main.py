@@ -31,6 +31,8 @@ class Snake:
             font=('consolas',20)
         )
         self.label.pack()
+        self.restart_button=tk.Button(master=window, text="Restart", command=self.game_restart)
+        self.restart_button.pack()
 
         # Bind arrow keys to change direction
         master.bind('<Up>', self.change_direction_up)
@@ -87,9 +89,16 @@ class Snake:
     def game_restart(self):
         self.canvas.delete("all")
         self.canvas.delete("You Lost")
-        score=0
-        tk.Label.config(text='Score:{}'.format(score))
-        snake=Snake(master=window)
+        self.snake=[(200,200),(190,200),(180,200)]
+        self.food=self.create_food()
+
+        self.direction='Right'
+        self.game_over=False
+        self.delay=100
+        self.score=0
+        self.label.config(text="Score:{}".format(self.score))
+
+        self.game_loop()
 
        
     def check_food(self):
