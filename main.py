@@ -23,7 +23,7 @@ class Snake:
         # Set up the game loop
         self.direction = 'Right'
         self.game_over = False
-        self.delay = 200
+        self.delay = 150
         self.score = 0
 
         # Snake color attribute
@@ -101,7 +101,7 @@ class Snake:
 
     def game_restart(self):
         self.canvas.delete("all")
-        self.canvas.delete("You Lost")
+        self.canvas.delete("You Lost :)")
         self.snake=[(200,200),(190,200),(180,200)]
         self.food=self.create_food()
 
