@@ -2,9 +2,6 @@ import tkinter as tk
 from tkinter import colorchooser
 import random
 
-# Create the game window
-window = tk.Tk()
-
 class Snake:
     def __init__(self, master):
         self.master = master
@@ -14,7 +11,8 @@ class Snake:
         self.canvas = tk.Canvas(
             master, 
             width=400, 
-            height=400
+            height=400, 
+            bg='light green'
         )
         self.canvas.pack()
 
@@ -28,30 +26,18 @@ class Snake:
         self.delay = 100
         self.score = 0
 
-        # Create the label for points
+        # Snake color attribute
+        self.snake_color = 'green'
+
+        #Written by Maite
         self.label = tk.Label(
             master, 
             text=f"Points: {self.score}",
-            font=('consolas', 20)
+            font=('consolas',20)
         )
         self.label.pack()
-
-        # Create the restart button
-        self.restart_button = tk.Button(
-            master=window, 
-            text="Restart", 
-            font=('consolas', 20), 
-            command=self.game_restart
-        )
+        self.restart_button = tk.Button(master=window, text="Restart", font=('consolas', 20), command=self.game_restart)
         self.restart_button.pack()
-
-        # Countdown timer label
-        self.timer_label = tk.Label(
-            master,
-            text="",
-            font=('consolas', 20)
-        )
-        self.timer_label.pack()
 
         # Bind arrow keys to change direction
         master.bind('<Up>', self.change_direction_up)
@@ -59,8 +45,16 @@ class Snake:
         master.bind('<Left>', self.change_direction_left)
         master.bind('<Right>', self.change_direction_right)
 
-        # Start the countdown timer
-        self.choose_color()
+        # Button to change snake color
+        self.color_button = tk.Button(master=window, text="Change Snake Color", font=('consolas', 20), command=self.choose_snake_color)
+        self.color_button.pack()
+
+        # Countdown label
+        self.countdown_label = tk.Label(master=window, text="", font=('consolas', 30))
+        self.countdown_label.pack()
+
+        # Start the countdown
+        self.start_countdown(3)
 
     def create_food(self):
         # Create a new piece of food at a random location on the canvas
@@ -76,10 +70,10 @@ class Snake:
         for i, (x, y) in enumerate(self.snake):
             if i == 0:
                 self.canvas.create_rectangle(x, y, x + self.square_size, y + self.square_size,
-                                             fill='white', tags='snake')
+                                            fill='white', tags='snake')
             else:
                 self.canvas.create_rectangle(x, y, x + self.square_size, y + self.square_size,
-                                             fill='green', tags='snake')
+                                            fill=self.snake_color, tags='snake')
 
     def move_snake(self):
         # Move the snake one step in the current direction
@@ -106,20 +100,20 @@ class Snake:
                 self.game_over = True
 
     def game_restart(self):
-        # Reset the game state
         self.canvas.delete("all")
         self.canvas.delete("You Lost")
-        self.snake = [(200, 200), (190, 200), (180, 200)]
-        self.food = self.create_food()
-        self.direction = 'Right'
-        self.game_over = False
-        self.delay = 100
-        self.score = 0
+        self.snake=[(200,200),(190,200),(180,200)]
+        self.food=self.create_food()
+
+        self.direction='Right'
+        self.game_over=False
+        self.delay=100
+        self.score=0
         self.label.config(text="Score:{}".format(self.score))
 
-        # Start the countdown timer
-        self.choose_color()
+        self.game_loop()
 
+       
     def check_food(self):
         # Check if the snake has eaten the food
         head_coords = self.canvas.coords(self.food)
@@ -131,19 +125,19 @@ class Snake:
             self.snake.append(self.snake[-1])
 
     def change_direction_up(self, event):
-        if self.direction != 'Down':
+        if self.direction!= 'Down':
             self.direction = 'Up'
 
     def change_direction_down(self, event):
-        if self.direction != 'Up':
+        if self.direction!= 'Up':
             self.direction = 'Down'
 
     def change_direction_left(self, event):
-        if self.direction != 'Right':
+        if self.direction!= 'Right':
             self.direction = 'Left'
 
     def change_direction_right(self, event):
-        if self.direction != 'Left':
+        if self.direction!= 'Left':
             self.direction = 'Right'
 
     def game_loop(self):
@@ -165,27 +159,25 @@ class Snake:
                     font=('consolas',30)
                 )
 
-    def countdown(self, count):
-        # Countdown timer
-        self.timer_label.config(text=f"Game starting in {count} seconds...")
+    def choose_snake_color(self):
+        color_code = colorchooser.askcolor(title="Choose Snake Color")
+        if color_code[1]:  
+            self.snake_color = color_code[1]  
+
+    def start_countdown(self, count):
         if count > 0:
-            self.master.after(1000, self.countdown, count - 1)
+            self.countdown_label.config(text=f"Game starting in {count} seconds...")
+            self.master.after(1000, self.start_countdown, count - 1)
         else:
-            self.timer_label.pack_forget()
+            self.countdown_label.config(text="")
             self.game_loop()
 
-    def choose_color(self):
-        # Choose background color before starting the game
-        color_code = colorchooser.askcolor(title="Choose color")
-        if color_code[1]:  
-            new_color = color_code[1]  
-            self.canvas.config(bg=new_color)  
-            # Start the countdown timer after choosing color
-            self.countdown(3)
 
+# Create the game window
+window = tk.Tk()
 
-# Create the Snake game instance
-snake_game = Snake(window)
+# Start the game
+snake = Snake(window)
 
 # Run the game window
 window.mainloop()
