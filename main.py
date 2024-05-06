@@ -179,7 +179,6 @@ window = tk.Tk()
 # Start the game
 snake = Snake(window)
 
-window.attributes('-fullscreen', True)
 # Run the game window
 window.mainloop()
 
