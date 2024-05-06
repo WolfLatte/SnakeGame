@@ -25,7 +25,7 @@ class Snake:
         # Set up the game loop
         self.direction = 'Right'
         self.game_over = False
-        self.delay = 100
+        self.delay = 200
         self.score = 0
 
         # Create the label for points
