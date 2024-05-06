@@ -154,7 +154,7 @@ class Snake:
                 self.canvas.create_text(
                     200, 
                     200, 
-                    text="You Lost", 
+                    text="You Lost :)", 
                     fill='white', 
                     font=('consolas',30)
                 )
